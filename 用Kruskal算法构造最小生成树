@@ -1,0 +1,57 @@
+typedef struct          
+{        
+    char vertex[VertexNum];
+    int edges[VertexNum][VertexNum];        
+    int n,e;
+}MGraph; 
+ 
+typedef struct node  
+{  
+    int u,v,w;
+}Edge; 
+
+void kruskal(MGraph G)  
+{  
+    int i,j,u1,v1,sn1,sn2,k;  
+    int vset[VertexNum];//判定两个顶点是否连通   
+    int E[EdgeNum];/ 
+    k=0;
+    for (i=0;i<G.n;i++)  
+    {  
+        for (j=0;j<G.n;j++)  
+        {  
+            if (G.edges[i][j]!=0 && G.edges[i][j]!=INF)  
+            {  
+                E[k].u=i;  
+                E[k].v=j;  
+                E[k].w=G.edges[i][j];  
+                k++;  
+            }  
+        }  
+    }     
+    heapsort(E,k,sizeof(E[0]));//堆排序       
+    for (i=0;i<G.n;i++)//初始化辅助数组   
+    {  
+        vset[i]=i;  
+    }  
+    k=1;
+    j=0;  
+    while (k<G.n)  
+    {   
+        sn1=vset[E[j].u];  
+        sn2=vset[E[j].v]; 
+        if (sn1!=sn2)  
+        {
+            printf("%d--->%d, %d",E[j].u,E[j].v,E[j].w);       
+            k++;  
+            for (i=0;i<G.n;i++)  
+            {  
+                if (vset[i]==sn2)  
+                {  
+                    vset[i]=sn1;  
+                }  
+            }             
+        }  
+        j++;  
+    }  
+}
