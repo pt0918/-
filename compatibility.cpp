@@ -1,23 +1,32 @@
-/* Note:Your choice is C IDE */
-#include<stdio.h>
-//#include "stdio.h"
-/*对fahr=1，2，3，。。。300
-打印华氏温度与摄氏温度对照表*/
-/*
-void main()
-{
-	int fahr, celsius;
-	int lower, upper, step;
-	lower = 0; //温度表的下限
-	upper = 300;//温度表的上限
-	step = 20;//步长
-	fahr = 0;
-	celsius = 0;
-	while (fahr <= 300);
-	{
-		celsius = 5 * (fahr - 32) / 9;
-		printf("%d\t%d\n", fahr, celsius);
-		fahr = fahr + step;
-	}
-}*/
-int main()
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define db double
+const int maxn=110;
+int n,m,t,is,cnt,ans;
+struct xx{
+    int l,r;
+}xx[maxn];
+bool cmp(struct xx a,struct xx b){
+    if(a.r==b.r)return a.l<b.l;
+    return a.r<b.r;
+}
+int main(){
+    ios::sync_with_stdio(false);
+    cout<<fixed<<setprecision(2);
+    while(cin>>n){
+        if(!n)return 0;
+        int ans=0,cnt=0;
+        for(int i=1;i<=n;i++)cin>>xx[i].l>>xx[i].r;
+        sort(xx+1,xx+1+n,cmp);
+        for(int i=1;i<=n;i++){
+            if(cnt<=xx[i].l){
+                ++ans;
+                cnt=xx[i].r;
+            }
+        }
+        cout<<ans<<"\n";
+    }
+    return 0;
+    //good job!
+}
